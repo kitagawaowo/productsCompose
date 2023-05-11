@@ -8,7 +8,7 @@ interface ProductService {
     @GET("search")
     fun fetchByName(
         @Query("query") name: String,
-        @Query("apiKey") apiKey: String = "a4bfa10d0f5c484ab7414544617a55f9",
+        @Query("apiKey") apiKey: String = ApiClient.getAPIKEY(),
         @Query("number") number: Int = 10,
     ): Call<ProductResponse>
 }
