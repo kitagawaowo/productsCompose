@@ -104,19 +104,24 @@ fun ProductCard(
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(8.dp)
         ){
-            Text(
-                text = product.id,
-                modifier = modifier.width(48.dp),
-                style = TextStyle(fontWeight = FontWeight.Bold)
-            )
-            ProductImage(
-                product,
-                modifier = Modifier.padding(start = 16.dp, end = 8.dp)
-            )
+
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Text(
+                    text = product.id,
+                    modifier = modifier.width(48.dp),
+                    style = TextStyle(fontWeight = FontWeight.Bold)
+                )
+                ProductImage(
+                    product,
+                    modifier = Modifier.padding(start = 16.dp, end = 8.dp)
+                )
+            }
             if (isFavoriteCard)
-                FavoriteProductItem(product, deleteProduct, modifier = modifier.weight(1f))
+                FavoriteProductItem(product, deleteProduct)
             else
                 ProductItem(product, insertProduct, deleteProduct)
         }
@@ -126,13 +131,21 @@ fun ProductCard(
 
 @Composable
 fun FavoriteProductItem(product: Product, deleteProduct: () -> Unit, modifier: Modifier = Modifier) {
-    Spacer(modifier = modifier.width(8.dp))
-    Row {
-        Column(modifier = modifier.weight(7f)) {
-            Text(text = product.name, fontWeight = FontWeight.Bold)
+    Spacer(modifier = modifier.width(9.dp))
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+    ){
+        Column(
+            modifier = modifier.weight(0.8f)
+        ) {
+            Text(
+                text = product.name,
+                fontWeight = FontWeight.Bold,
+            )
         }
+        Spacer(modifier = modifier.width(8.dp))
         IconButton(
-            modifier = modifier.weight(1f),
+            modifier = modifier.weight(0.2f).padding(end = 8.dp),
             onClick = {
                 deleteProduct()
             }) {
@@ -147,13 +160,13 @@ fun FavoriteProductItem(product: Product, deleteProduct: () -> Unit, modifier: M
 fun ProductItem(product: Product, insertProduct: () -> Unit, deleteProduct: () -> Unit, modifier: Modifier = Modifier) {
     val isFavorite = remember { mutableStateOf(false) }
     isFavorite.value = product.favorite
-    Spacer(modifier = modifier.width(8.dp))
+    Spacer(modifier = modifier.width(9.dp))
     Row {
-        Column(modifier = modifier.weight(7f)) {
+        Column(modifier = modifier.weight(0.8f)) {
             Text(text = product.name, fontWeight = FontWeight.Bold)
         }
         IconButton(
-            modifier = modifier.weight(1f),
+            modifier = modifier.weight(0.2f).padding(end = 8.dp),
             onClick = {
                 if (isFavorite.value) {
                     deleteProduct()
@@ -178,6 +191,7 @@ fun ProductImage(product: Product, modifier: Modifier = Modifier) {
         contentDescription = null,
         modifier = modifier
             .size(92.dp)
+            .padding(vertical = 8.dp)
             .clip(shape = RoundedCornerShape(8.dp)),
         contentScale = ContentScale.Crop
     )
