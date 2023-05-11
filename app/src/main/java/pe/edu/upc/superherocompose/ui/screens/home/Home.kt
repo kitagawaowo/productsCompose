@@ -1,5 +1,6 @@
 package pe.edu.upc.superherocompose.ui.screens.home
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -9,6 +10,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -46,25 +48,35 @@ fun HomeScreen(
     modifier: Modifier = Modifier
 ) {
 
-    Column {
+    Column(
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+    ){
+        Text("App List Product")
         BrandingImage(modifier)
-        Row {
-            Spacer(modifier = modifier.size(16.dp))
+        Row(
+            modifier = modifier
+                .padding(horizontal = 6.dp)
+                .padding(top = 16.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Button(
                 modifier = modifier
-                    .padding(horizontal = 4.dp)
                     .size(200.dp, 48.dp)
-                    .clip(shape = RoundedCornerShape(4.dp)),
-                onClick = { navigateFind() }
+                    .clip(shape = RoundedCornerShape(4.dp))
+                    .padding(horizontal = 4.dp),
+            onClick = { navigateFind() }
             ) {
                 Text(text = "Find Product")
             }
 
             Button(
                 modifier = modifier
-                    .padding(horizontal = 4.dp)
                     .size(200.dp, 48.dp)
-                    .clip(shape = RoundedCornerShape(4.dp)),
+                    .clip(shape = RoundedCornerShape(4.dp))
+                    .padding(horizontal = 4.dp),
                 onClick = { navigateFavorites() }
             ) {
                 Text(text = "Favourite Products")
