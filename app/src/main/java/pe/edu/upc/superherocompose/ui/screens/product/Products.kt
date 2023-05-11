@@ -28,10 +28,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -100,9 +102,19 @@ fun ProductCard(
             .fillMaxWidth()
             .padding(4.dp)
     ) {
-        Row {
-            Text(text = product.id, modifier = modifier.width(32.dp))
-            ProductImage(product)
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(16.dp)
+        ){
+            Text(
+                text = product.id,
+                modifier = modifier.width(48.dp),
+                style = TextStyle(fontWeight = FontWeight.Bold)
+            )
+            ProductImage(
+                product,
+                modifier = Modifier.padding(start = 16.dp, end = 8.dp)
+            )
             if (isFavoriteCard)
                 FavoriteProductItem(product, deleteProduct, modifier = modifier.weight(1f))
             else
